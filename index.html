@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 2em;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 2em;
+        }
+        h1 {
+            margin-top: 0;
+        }
+        form {
+            margin-bottom: 1em;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.7em 1.5em;
+            font-size: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        textarea {
+            resize: vertical;
+        }
+        .section-header {
+            background-color: #e9ecef;
+            padding: 0.5em;
+            border-radius: 4px;
+            margin-bottom: 1em;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Auto Resume Parsing & Auto Form Filling LLM Application</h1>
+    </header>
+    <div class="container">
+        <h2>Upload Resume</h2>
+        <form id="resumeForm" action="/upload_resume" method="post" enctype="multipart/form-data">
+            <label for="resume">Resume (PDF only):</label>
+            <input type="file" id="resume" name="resume" accept=".pdf" required>
+            <button type="submit">Upload</button>
+        </form>
+
+        {% if full_name %}
+        <h2 class="section-header">Extracted Resume Details</h2>
+        <form id="resumeDetailsForm">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" name="fullName" value="{{ full_name }}" readonly><br>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" name="contactNumber" value="{{ contact_number }}" readonly><br>
+
+            <label for="emailAddress">Email Address:</label>
+            <input type="text" id="emailAddress" name="emailAddress" value="{{ email_address }}" readonly><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" value="{{ location }}" readonly><br>
+
+            <label for="technicalSkills">Technical Skills:</label>
+            <textarea id="technicalSkills" name="technicalSkills" rows="4" readonly>{{ technical_skills }}</textarea><br>
+
+            <label for="nonTechnicalSkills">Non-Technical Skills:</label>
+            <textarea id="nonTechnicalSkills" name="nonTechnicalSkills" rows="4" readonly>{{ non_technical_skills }}</textarea><br>
+
+            <label for="education">Education:</label>
+            <textarea id="education" name="education" rows="4" readonly>{{ education }}</textarea><br>
+
+            <label for="workExperience">Work Experience:</label>
+            <textarea id="workExperience" name="workExperience" rows="4" readonly>{{ work_experience }}</textarea><br>
+
+            <label for="certifications">Certifications:</label>
+            <textarea id="certifications" name="certifications" rows="4" readonly>{{ certifications }}</textarea><br>
+
+            <label for="languages">Languages:</label>
+            <textarea id="languages" name="languages" rows="2" readonly>{{ languages }}</textarea><br>
+
+            <label for="suggestedCategory">Suggested Resume Category:</label>
+            <input type="text" id="suggestedCategory" name="suggestedCategory" value="{{ suggested_resume_category }}" readonly><br>
+
+            <label for="recommendedRoles">Recommended Job Roles:</label>
+            <textarea id="recommendedRoles" name="recommendedRoles" rows="2" readonly>{{ recommended_job_roles }}</textarea><br>
+        </form>
+        {% endif %}
+
+    </div>
+</body>
+</html>
